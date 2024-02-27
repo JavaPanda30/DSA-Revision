@@ -1,0 +1,26 @@
+//https://www.codingninjas.com/studio/problems/find-power-of-a-number_893198
+
+import java.util.* ;
+import java.io.*; 
+
+class Solution {
+
+	public static long Pow(int X, int N) {
+		//Write your code here
+
+		if(N==1){
+			return X;
+		}
+		if(N==0){
+			return 1;
+		}
+		long val = Pow(X,N/2);
+		val = val*val;
+		if(N%2==0){
+			return val;
+		}
+		else{
+			return val*X;
+		}
+	}
+}
