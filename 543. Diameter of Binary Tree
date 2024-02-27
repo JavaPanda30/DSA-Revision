@@ -1,0 +1,36 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int max = 0;
+    public int diameterOfBinaryTree(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        passingDepth(root);
+        return max;
+    }
+    public int passingDepth(TreeNode root){
+        if(root==null){
+            return -1;
+        }
+        int left = passingDepth(root.left);
+        int right = passingDepth(root.right);
+        //for null node -1 is returned so if leaf node then left=-1 right=-1 and distance is 0, so used +2 here
+        max = Math.max(max,left+right+2);
+        // returning +1 as the total distance will be calculated as edges and not nodes.
+        return Math.max(left,right)+1;
+    }
+}
