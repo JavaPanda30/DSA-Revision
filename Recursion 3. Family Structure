@@ -1,0 +1,26 @@
+//https://www.codingninjas.com/studio/problems/family-structure_981243
+
+
+//if male has left subtree as male and right subtree as female and female has left subtree as female and right subtree as male then it is sure that for each node, if it is odd then it is left subtree and is same as parent  but if it is a right subtree then it is opposite of its parent.
+
+
+public class Solution {
+    public static boolean rec(int n, long k){
+        if(n==1 || k==1){
+            return false;   
+        }
+        if(k%2 ==0){
+            return !rec(n-1, k/2);
+        }else{
+            return rec(n-1, (k+1)/2);
+        }
+    }
+	public static String kthChildNthGeneration(int n, long k) {
+        // Write your code here
+        if(rec(n,k)){
+            return "Female";
+        }else{
+            return "Male";
+        }
+    }
+}
