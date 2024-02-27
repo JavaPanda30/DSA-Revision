@@ -1,0 +1,27 @@
+//https://www.codingninjas.com/studio/problems/ninja-and-flip-game_1232645
+
+import java.util.* ;
+import java.io.*; 
+public class Solution  {   
+    public static boolean canNinjaWin(String str)     
+    {                   
+        if (str.length() < 2)         
+        {            
+            return false;        
+        }                       
+        for (int i = 0; i < str.length() - 1; i++)         
+        {            
+            if (str.charAt(i) == '$' && str.charAt(i + 1) == '$')             
+            {                
+                String ans = str.substring(0, i) + "**" + str.substring(i + 2);                                  
+                if(!canNinjaWin(ans))                 
+                {                    
+                    return true;                
+                }            
+            }        
+        }
+        return false;    
+    } 
+}
+
+ 
