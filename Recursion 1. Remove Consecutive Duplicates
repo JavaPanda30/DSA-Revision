@@ -1,0 +1,22 @@
+//https://www.codingninjas.com/studio/problems/remove-consecutive-duplicates_893195
+
+
+
+public class Solution {
+	public static String removeConsecutiveDuplicates(String s) {
+		// Write your code here
+		return helper(s,0);
+		}
+
+		public static String helper(String s, int idx){
+			if(idx==s.length()-1){
+				return s.substring(idx);
+			}
+			if(s.charAt(idx)==s.charAt(idx+1)){
+				return helper(s,idx+1);
+			}
+			else{
+				return s.charAt(idx)+helper(s.substring(idx+1),0);
+			}
+		}
+}
