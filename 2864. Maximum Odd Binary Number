@@ -1,0 +1,26 @@
+class Solution {
+    public String maximumOddBinaryNumber(String s) {
+        HashMap<Character,Integer> aman = new HashMap<>();
+        for(char ch: s.toCharArray()){
+            if(!aman.containsKey(ch)){
+            aman.put(ch,1);
+            }
+            else{
+            aman.put(ch,aman.get(ch)+1);
+            }
+        }
+        if(!aman.containsKey('0')){
+            return s;
+        }
+        int num1 = aman.get('1')-1;
+        int num0 = aman.get('0');
+        String ans = ""+'1';
+        for(int i=0;i<num0;i++){
+            ans='0'+ans;
+        }
+        for(int i=0;i<num1;i++){
+            ans = '1'+ans;
+        }
+        return ans;
+    }
+}
