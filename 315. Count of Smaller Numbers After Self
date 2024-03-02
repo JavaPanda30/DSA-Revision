@@ -1,0 +1,36 @@
+//Sorting + Binary Search index and add it to ans list then remove that element from list.
+
+class Solution {
+    public List<Integer> countSmaller(int[] nums) {
+        var lst = new ArrayList<Integer>();
+        var ans = new ArrayList<Integer>();
+        for(int i : nums){
+            lst.add(i);
+        }
+        int curr,idx;
+        Collections.sort(lst);
+        for(int i=0;i<nums.length;i++){
+            curr = nums[i];
+            idx = binarySearch(curr,lst);
+            ans.add(idx);
+            lst.remove(idx);
+            idx=0;
+        }
+        return ans;
+    }
+    static int binarySearch(int n,List<Integer> list){
+        int start =0;
+        int end = list.size()-1;
+        while(start<end){
+            int mid = start+(end-start)/2;
+            if(list.get(mid)==n){
+                end=mid;
+            }else if(list.get(mid)>n){
+                end = mid-1;
+            }else{
+                start = mid+1;
+            }
+        }
+        return start;
+    }
+}
