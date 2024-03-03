@@ -1,0 +1,73 @@
+/*********************************************************
+
+ Following is the TreeNode structure:
+
+ class TreeNode {
+     int data;
+     TreeNode left;
+     TreeNode right;
+     TreeNode() {
+         this.data = 0;
+         this.left = null;
+         this.right = null;
+     }
+     TreeNode(int data) {
+         this.data = data;
+         this.left = null;
+         this.right = null;
+     }
+     TreeNode(int data, TreeNode left, TreeNode right) {
+         this.data = data;
+         this.left = left;
+         this.right = right;
+     }
+ };
+ ********************************************************/
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+public class Solution {
+    public static List<List<Integer>> getTreeTraversal(TreeNode root) {
+        // Write your code here.
+        List<Integer> pre = new ArrayList<>();
+        List<Integer> ino = new ArrayList<>();
+        List<Integer> post = new ArrayList<>();
+        Stack<Pair> stack = new Stack<>();
+        Pair a = new Pair(root,1);
+        stack.push(a);
+        while(!stack.isEmpty()){
+            int n = stack.peek().num;
+            Pair temp = stack.peek();
+            if(n==1){
+                pre.add(temp.node.data);
+                temp.num++;
+                if(temp.node.left!=null)
+                stack.push(new Pair(temp.node.left,1));
+            }
+            if(n==2){
+                ino.add(temp.node.data);
+                temp.num++;
+                if(temp.node.right!=null)
+                stack.push(new Pair(temp.node.right,1));
+            }
+            if(n==3){
+                post.add(temp.node.data);
+                stack.pop();
+            }
+        }
+        List<List<Integer>> ans = new ArrayList<>();
+        ans.add(ino);
+        ans.add(pre);
+        ans.add(post);
+        return ans;
+    }
+    static class Pair{
+        TreeNode node;
+        int num;
+        Pair(TreeNode node,int num){
+            this.node = node;
+            this.num = num;
+        }
+    }
+}
