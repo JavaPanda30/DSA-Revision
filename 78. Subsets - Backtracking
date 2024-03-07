@@ -1,0 +1,17 @@
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        HashSet<List<Integer>> ans = new HashSet<>();
+        helper(nums,ans,0,new ArrayList<Integer>());
+        return new ArrayList<>(ans);
+    }
+    public static void helper(int[] nums,HashSet<List<Integer>> ans,int idx,ArrayList<Integer> lst){
+        ans.add(new ArrayList<>(lst));
+        if(idx==nums.length){
+            return;
+        }
+        lst.add(nums[idx]);
+        helper(nums,ans,idx+1,lst);
+        lst.remove(lst.size()-1);
+        helper(nums,ans,idx+1,lst);
+    }
+}
