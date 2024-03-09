@@ -1,0 +1,67 @@
+class Solution
+{
+	ArrayList <Integer> boundary(Node root)
+	{
+	    ArrayList<Integer> ans = new ArrayList<>();
+        ans.add(root.data);
+	    if(root.left==null && root.right==null){
+	        return ans;
+	    }
+        if(root.left!=null)
+        {
+            helperLeftBoundary(ans,root);
+            ans.remove(ans.size()-1);
+        }
+        inorder(ans,root);
+        if(root.right!=null)
+        {
+            helperRightBoundary(ans,root);
+        }
+        return ans;
+	}
+	
+	public static void helperLeftBoundary(List<Integer> ans,Node root){
+        if(root.left==null && root.right==null){ 
+            return;
+        }
+        if(root.left!=null){
+            ans.add(root.left.data);
+            helperLeftBoundary(ans, root.left);
+        }
+        else if(root.left==null && root.right!=null){
+            ans.add(root.right.data);
+            helperLeftBoundary(ans, root.right);
+        }
+    }
+    public static void inorder(List<Integer> ans,Node root){
+        if(root==null){
+            return;
+        }
+        inorder(ans,root.left);       
+        if(root.left==null && root.right==null){
+            ans.add(root.data);
+        }
+        inorder(ans,root.right);
+    }
+
+    public static void helperRightBoundary(List<Integer> ans, Node root){
+        List<Integer> temp = new ArrayList<>();
+        helper(temp,root);
+        temp.remove(temp.size()-1);
+        Collections.reverse(temp);
+        ans.addAll(temp);
+    }
+    public static void helper(List<Integer> temp,Node root){
+        if(root.left==null && root.right==null){
+            return;
+        }
+        if(root.right!=null){
+            temp.add(root.right.data);
+            helper(temp,root.right);
+        }
+        else if(root.right==null && root.left!=null){
+            temp.add(root.left.data);
+            helper(temp,root.left);
+        }
+    }
+}
