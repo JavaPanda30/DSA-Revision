@@ -1,0 +1,39 @@
+class Solution
+{
+    public int cnt=0;
+    public HashSet<Node> aman  = new HashSet<>();
+    public int printKDistantfromLeaf(Node root, int k)
+    {
+        // Write your code here
+        treeloop(root,k);
+        return cnt;
+    }
+    
+    public void treeloop(Node root,int k){
+        if(root==null){
+            return;
+        }
+        treeloop(root.left,k);
+        treeloop(root.right,k);
+        if(!helper(root,k))
+        {
+            cnt++;
+            aman = new HashSet<>();
+        }
+    }
+    
+    public boolean helper(Node root,int k){
+        if(root==null) {
+            return aman.isEmpty();
+        }
+        if(k==0){
+            if(root.left==null && root.right==null)
+            {
+                aman.add(root);
+            }
+        }
+        helper(root.left,k-1);
+        helper(root.right,k-1);
+        return aman.isEmpty();
+    }
+}
