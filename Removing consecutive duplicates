@@ -1,0 +1,22 @@
+class Solution
+{
+    //Function to remove consecutive duplicates from given string using Stack.
+    public static String removeConsecutiveDuplicates(String str)
+    {
+        // Your code here
+        Stack<Character> aman =new Stack<>();
+        for(char c: str.toCharArray()){
+            if(aman.empty()){
+                aman.push(c);
+            }
+            if(aman.peek()!=c){
+                aman.push(c);
+            }
+        }
+        String ans = "";
+        while(!aman.empty()){
+            ans=aman.pop()+ans;
+        }
+        return ans;
+    }
+}
