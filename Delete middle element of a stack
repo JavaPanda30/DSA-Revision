@@ -1,0 +1,14 @@
+class Solution
+{
+    //Function to delete middle element of a stack.
+    public void deleteMid(Stack<Integer>s,int sizeOfStack){
+        // code here
+        int n=sizeOfStack-s.size();
+        if(s.empty() || n==sizeOfStack)
+            return;
+        int temp = s.pop();
+        deleteMid(s,sizeOfStack);
+        if(Math.round(sizeOfStack/2) != n)
+            s.push(temp);
+    } 
+}
