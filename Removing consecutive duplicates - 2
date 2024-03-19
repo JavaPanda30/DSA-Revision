@@ -1,0 +1,32 @@
+class Solution
+{
+    //Function to remove pair of duplicates from given string using Stack.
+    public static String removePair(String str)
+    {
+        // your code here
+        Stack<Character> aman = new Stack<>();
+        int i=0;
+        while(i<str.length()){
+            if(aman.empty()){
+                aman.push(str.charAt(i));
+                i++;
+            }
+            if(i==str.length())break;
+            char ch1 = str.charAt(i);
+            char ch2 = aman.peek();
+            if(ch1==ch2){
+                aman.pop();
+                i++;
+            }
+            else{
+                aman.push(ch1);
+                i++;
+            }
+        }
+        String ans = "";
+        while(!aman.empty()){
+            ans=aman.pop()+ans;
+        }
+        return ans;
+    }
+}
